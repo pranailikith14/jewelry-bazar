@@ -1,7 +1,7 @@
-package com.jewellery.compare.controller;
+package com.jewellery.person.controller;
 
-import com.jewellery.compare.model.Person;
-import com.jewellery.compare.service.PersonService;
+import com.jewellery.person.model.Person;
+import com.jewellery.person.service.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

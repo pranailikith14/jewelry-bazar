@@ -1,7 +1,7 @@
-package com.jewellery.compare.service;
+package com.jewellery.person.service;
 
-import com.jewellery.compare.model.Person;
-import com.jewellery.compare.repository.PersonRepository;
+import com.jewellery.person.model.Person;
+import com.jewellery.person.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

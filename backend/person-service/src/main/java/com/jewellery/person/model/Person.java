@@ -1,4 +1,4 @@
-package com.jewellery.compare.model;
+package com.jewellery.person.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

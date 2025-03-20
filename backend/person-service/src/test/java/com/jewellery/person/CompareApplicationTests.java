@@ -1,4 +1,4 @@
-package com.jewellery.compare;
+package com.jewellery.person;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

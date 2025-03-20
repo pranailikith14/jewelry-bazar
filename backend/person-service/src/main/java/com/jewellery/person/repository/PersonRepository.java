@@ -1,6 +1,6 @@
-package com.jewellery.compare.repository;
+package com.jewellery.person.repository;
 
-import com.jewellery.compare.model.Person;
+import com.jewellery.person.model.Person;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
