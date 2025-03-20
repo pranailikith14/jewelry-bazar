@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CompareApplication {
+public class PersonMicroservice {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CompareApplication.class, args);
+		SpringApplication.run(PersonMicroservice.class, args);
 	}
 
 }

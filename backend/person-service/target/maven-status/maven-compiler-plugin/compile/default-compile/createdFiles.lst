@@ -1,0 +1,6 @@
+com\jewellery\compare\repository\PersonRepository.class
+com\jewellery\compare\PersonMicroservice.class
+com\jewellery\compare\service\PersonService.class
+com\jewellery\compare\service\PersonServiceImpl.class
+com\jewellery\compare\model\Person.class
+com\jewellery\compare\controller\PersonController.class

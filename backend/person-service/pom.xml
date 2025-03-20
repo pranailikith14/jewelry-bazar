@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jewellery</groupId>
-	<artifactId>compare</artifactId>
+	<artifactId>person-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>compare</name>
 	<description>jewellery compare application</description>
