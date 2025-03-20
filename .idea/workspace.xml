@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="97bb8835-b392-45db-975c-11fe15592ff6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jewelry-bazar.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/src/main/java/com/jewellery/person/PersonMicroservice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/src/main/java/com/jewellery/person/controller/PersonController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/src/main/java/com/jewellery/person/model/Person.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/src/main/java/com/jewellery/person/repository/PersonRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/src/main/java/com/jewellery/person/service/PersonService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/src/main/java/com/jewellery/person/service/PersonServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/src/test/java/com/jewellery/person/CompareApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/classes/com/jewellery/compare/PersonMicroservice.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/classes/com/jewellery/compare/controller/PersonController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/classes/com/jewellery/compare/model/Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/classes/com/jewellery/compare/repository/PersonRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/classes/com/jewellery/compare/service/PersonService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/classes/com/jewellery/compare/service/PersonServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/person-service-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/person-service-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/surefire-reports/TEST-com.jewellery.compare.CompareApplicationTests.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/surefire-reports/com.jewellery.compare.CompareApplicationTests.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/person-service/target/test-classes/com/jewellery/compare/CompareApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/jewellery/person/PersonMicroservice.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/jewellery/person/controller/PersonController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/jewellery/person/model/Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/jewellery/person/repository/PersonRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/jewellery/person/service/PersonService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/jewellery/person/service/PersonServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/com/jewellery/person/CompareApplicationTests.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2uagjB7FeT8Yg84x4N5eHxtvzex" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CompareApplication.executor": "Run",
+    "Application.EurekaServiceApplication.executor": "Run",
+    "Application.PersonMicroservice.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Users/prana/Downloads/jewelry-bazar/backend/person-service/src/main/java/com/jewellery",
+    "last_opened_file_path": "C:/Users/prana/Downloads/jewelry-bazar/person-microservice",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\prana\Downloads\jewelry-bazar\backend\person-service" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="97bb8835-b392-45db-975c-11fe15592ff6" name="Changes" comment="" />
+      <created>1742492231403</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742492231403</updated>
+    </task>
+    <servers />
+  </component>
+</project>
