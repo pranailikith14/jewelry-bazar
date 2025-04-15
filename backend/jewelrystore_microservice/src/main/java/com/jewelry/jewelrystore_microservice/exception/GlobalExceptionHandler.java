@@ -30,4 +30,14 @@ public class GlobalExceptionHandler {
         errorMap.put("debug", exception.getMessage());
         return new ResponseEntity<>(errorMap, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> handleIllegalArgument(IllegalArgumentException illegalArgumentException) {
+        Map<String, Object> errorMap = new HashMap<>();
+        errorMap.put("timestamp", LocalDateTime.now());
+        errorMap.put("status", HttpStatus.BAD_REQUEST.value());
+        errorMap.put("message", illegalArgumentException.getMessage());
+        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
+    }
+
 }
