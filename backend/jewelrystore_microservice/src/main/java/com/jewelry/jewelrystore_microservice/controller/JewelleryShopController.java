@@ -3,9 +3,7 @@ package com.jewelry.jewelrystore_microservice.controller;
 import com.jewelry.jewelrystore_microservice.model.JewelleryShop;
 import com.jewelry.jewelrystore_microservice.service.JewelleryShopService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,4 +22,11 @@ public class JewelleryShopController {
         List<JewelleryShop> jewelleryShops = jewelleryShopService.getAllShops();
         return ResponseEntity.ok(jewelleryShops);
     }
+
+    @PostMapping("/filter-by-brands")
+    public ResponseEntity<List<JewelleryShop>> getShopsByBrands(@RequestBody List<String> brands) {
+        List<JewelleryShop> jewelleryShops = jewelleryShopService.getShopsByBrands(brands);
+        return ResponseEntity.ok(jewelleryShops);
+    }
+
 }

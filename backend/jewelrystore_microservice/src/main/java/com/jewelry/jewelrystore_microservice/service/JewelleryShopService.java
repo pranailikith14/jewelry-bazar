@@ -7,4 +7,6 @@ import java.util.List;
 public interface JewelleryShopService {
 
     List<JewelleryShop> getAllShops();
+
+    List<JewelleryShop> getShopsByBrands(List<String> brands);
 }

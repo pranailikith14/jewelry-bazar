@@ -24,4 +24,14 @@ public class JewelleryShopServiceImpl implements JewelleryShopService{
         }
         return jewelleryShops;
     }
+
+    @Override
+    public List<JewelleryShop> getShopsByBrands(List<String> brands) {
+        List<JewelleryShop> jewelleryShops = jewelleryShopRepository.findByBrandIn(brands);
+        if (jewelleryShops.isEmpty()) {
+            throw new ResourceNotFoundException("No jewellery shops found for selected brands.");
+        }
+        return jewelleryShops;
+    }
+
 }
