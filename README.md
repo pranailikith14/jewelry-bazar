@@ -39,6 +39,15 @@ An elegant and full-featured jewelry shop application built with a modern tech s
     - cd backend
     - ./mvnw spring-boot:run
 
+---
+
+## 🧪 Running the Application with Profiles
+
+To run the backend with the `dev` profile (which loads `application-dev.properties`):
+
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Dspring.profiles.active=dev"
+
 📦 API Endpoints
 Method	Endpoint	Description
  - GET	/api/shops	Get all jewelry shops
