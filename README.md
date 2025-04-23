@@ -47,6 +47,7 @@ To run the backend with the `dev` profile (which loads `application-dev.properti
 
 ```bash
 ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Dspring.profiles.active=dev"
+```
 
 📦 API Endpoints
 Method	Endpoint	Description
