@@ -9,15 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "jewellery_schemes")
-public class JewelleryShop {
+@NoArgsConstructor
+@Document(collection = "jewellery_shop_card_data")
+public class JewelleryShopCardData {
     @Id
     private String id;
     private String brand;
-    private int yearEstablished;
     private String stores;
-    private boolean onlineStoreAvailability;
-    private List<JewelleryScheme> schemes;
+    private List<JewelleryShopSchemeCardData> schemes;
 }

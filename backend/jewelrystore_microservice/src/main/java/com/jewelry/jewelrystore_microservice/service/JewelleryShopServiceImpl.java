@@ -2,10 +2,13 @@ package com.jewelry.jewelrystore_microservice.service;
 
 import com.jewelry.jewelrystore_microservice.exception.ResourceNotFoundException;
 import com.jewelry.jewelrystore_microservice.model.JewelleryShop;
+import com.jewelry.jewelrystore_microservice.model.JewelleryShopCardData;
+import com.jewelry.jewelrystore_microservice.repository.JewelleryShopCardDataRepository;
 import com.jewelry.jewelrystore_microservice.repository.JewelleryShopRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,18 +16,21 @@ import java.util.stream.Collectors;
 public class JewelleryShopServiceImpl implements JewelleryShopService{
 
     private final JewelleryShopRepository jewelleryShopRepository;
+    private final JewelleryShopCardDataRepository jewelleryShopCardDataRepository;
 
-    public JewelleryShopServiceImpl(JewelleryShopRepository jewelleryShopRepository) {
+    public JewelleryShopServiceImpl(JewelleryShopRepository jewelleryShopRepository,
+                                    JewelleryShopCardDataRepository jewelleryShopCardDataRepository) {
         this.jewelleryShopRepository = jewelleryShopRepository;
+        this.jewelleryShopCardDataRepository = jewelleryShopCardDataRepository;
     }
 
     @Override
-    public List<JewelleryShop> getAllShops() {
-        List<JewelleryShop> jewelleryShops = jewelleryShopRepository.findAll();
-        if (jewelleryShops.isEmpty()) {
+    public List<JewelleryShopCardData> getAllShops() {
+        List<JewelleryShopCardData> jewelleryShopsCardData = jewelleryShopCardDataRepository.findAll();
+        if (jewelleryShopsCardData.isEmpty()) {
             throw new ResourceNotFoundException("No jewellery shops found.");
         }
-        return jewelleryShops;
+        return jewelleryShopsCardData;
     }
 
     @Override
@@ -47,6 +53,21 @@ public class JewelleryShopServiceImpl implements JewelleryShopService{
             throw new ResourceNotFoundException("No jewellery shops found for selected brands.");
         }
         return jewelleryShops;
+    }
+
+    @Override
+    public void insertJewelleryShopData(JewelleryShop jewelleryShop) {
+        if (jewelleryShop == null || jewelleryShop.getBrand() == null || jewelleryShop.getBrand().isBlank()) {
+            throw new IllegalArgumentException("Jewellery shop brand cannot be null or empty.");
+        }
+
+        //Check if the brand already exists to avoid duplication
+        Optional<JewelleryShop> existingShop = jewelleryShopRepository.findByBrand(jewelleryShop.getBrand());
+        if (existingShop.isPresent()) {
+            throw new IllegalArgumentException("Jewellery shop with this brand already exists.");
+        }
+
+        jewelleryShopRepository.save(jewelleryShop);
     }
 
 }
