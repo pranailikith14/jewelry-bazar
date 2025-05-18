@@ -17,9 +17,10 @@ public class JewelleryScheme {
     private String minimumPayment;
     private String duration;
     private String bonusOrMakingChargesWaiver;
+    private String paymentDelayPolicy;
     private boolean gstBenefit;
     private List<String> purityOffered;
-    private boolean goldRateProtection;
+    private String goldRateProtection;
     private String goldRedemptionPrice;
     private boolean buybackAvailable;
     private String paymentMethods;
