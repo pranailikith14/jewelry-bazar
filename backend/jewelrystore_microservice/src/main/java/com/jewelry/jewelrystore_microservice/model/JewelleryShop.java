@@ -19,5 +19,6 @@ public class JewelleryShop {
     private int yearEstablished;
     private String stores;
     private boolean onlineStoreAvailability;
+    private byte[] logo;
     private List<JewelleryScheme> schemes;
 }

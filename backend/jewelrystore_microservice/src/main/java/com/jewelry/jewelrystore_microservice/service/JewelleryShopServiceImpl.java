@@ -47,7 +47,7 @@ public class JewelleryShopServiceImpl implements JewelleryShopService{
          * check the uniqueness in the list of brands
          */
         Set<String> normalizedBrands = brands.stream().map(String::toLowerCase).collect(Collectors.toSet());
-        if (normalizedBrands.size() != 3) {
+        if (normalizedBrands.size() != brands.size()) {
             throw new IllegalArgumentException("Brand names must be unique (case-insensitive).");
         }
         List<JewelleryShop> jewelleryShops = jewelleryShopRepository.findByBrandIn(brands);
@@ -58,7 +58,7 @@ public class JewelleryShopServiceImpl implements JewelleryShopService{
     }
 
     @Override
-    public void insertJewelleryShopData(JewelleryShop jewelleryShop) {
+    public void insertJewelleryShopData(JewelleryShop jewelleryShop, MultipartFile multipartFile) throws IOException {
         if (jewelleryShop == null || jewelleryShop.getBrand() == null || jewelleryShop.getBrand().isBlank()) {
             throw new IllegalArgumentException("Jewellery shop brand cannot be null or empty.");
         }
@@ -67,6 +67,10 @@ public class JewelleryShopServiceImpl implements JewelleryShopService{
         Optional<JewelleryShop> existingShop = jewelleryShopRepository.findByBrand(jewelleryShop.getBrand());
         if (existingShop.isPresent()) {
             throw new IllegalArgumentException("Jewellery shop with this brand already exists.");
+        }
+
+        if(multipartFile != null && !multipartFile.isEmpty()) {
+            jewelleryShop.setLogo(multipartFile.getBytes());
         }
 
         jewelleryShopRepository.save(jewelleryShop);

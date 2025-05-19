@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -73,20 +74,32 @@ public class JewelleryShopController {
     }
 
     @Operation(
-            summary = "Insert a Jewellery Shop",
-            description = "Add a new jewellery shop with all its schemes",
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "Data inserted successfully",
-                            content = @Content(schema = @Schema(type = "object"))),
-                    @ApiResponse(responseCode = "400", description = "Invalid input data"),
-                    @ApiResponse(responseCode = "500", description = "Server error")
-            }
+            summary = "Insert Jewellery Shop Data",
+            description = "Inserts a new jewellery shop with its details and logo as a multipart file"
     )
-    @PostMapping("/insert")
-    public ResponseEntity<Map<String, Object>> insertJewelleryShopData(@Valid @RequestBody JewelleryShop jewelleryShop) {
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Data inserted successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(example = "{\"status\": 201, \"message\": \"Data inserted successfully\"}"))),
+            @ApiResponse(responseCode = "400", description = "Validation Error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(example = "{\"status\": 400, \"message\": \"Validation Error\"}"))),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(example = "{\"status\": 500, \"message\": \"Internal Server Error\"}")))
+    })
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Jewellery shop data in JSON format and logo as a multipart file",
+            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE)
+    )
+    @RequestMapping(value = "/insert", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Map<String, Object>> insertJewelleryShopData(@RequestPart ("jewelleryShopData") String jewelleryShopData,
+                                                                       @RequestPart ("multipartFile") MultipartFile multipartFile) {
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JewelleryShop jewelleryShop = objectMapper.readValue(jewelleryShopData, JewelleryShop.class);
             log.info("Received request to insert jewellery shop: {}", jewelleryShop.getBrand());
-            jewelleryShopService.insertJewelleryShopData(jewelleryShop);
+            jewelleryShopService.insertJewelleryShopData(jewelleryShop, multipartFile);
             log.info("Successfully inserted shop: {}", jewelleryShop.getBrand());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(
@@ -107,6 +120,22 @@ public class JewelleryShopController {
         }
     }
 
+    @Operation(
+            summary = "Insert Jewellery shop card Data",
+            description = "Inserts a new jewellery shop along with its logo as a multipart file"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Data inserted successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(example = "{\"status\": 201, \"message\": \"Data inserted successfully\"}"))),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(example = "{\"status\": 500, \"message\": \"Internal Server Error\"}")))
+    })
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Jewellery shop data in JSON format and logo as a multipart file",
+            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE)
+    )
     @RequestMapping(value = "/insertShopCardData", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Map<String, Object>> insertJewelleryShopCardData(@RequestPart ("jewelleryShopCardData") String jewelleryShopCardData,
                                                                            @RequestPart ("multipartFile") MultipartFile multipartFile) {

@@ -13,7 +13,7 @@ public interface JewelleryShopService {
 
     List<JewelleryShop> getShopsByBrands(List<String> brands);
 
-    void insertJewelleryShopData(JewelleryShop jewelleryShop);
+    void insertJewelleryShopData(JewelleryShop jewelleryShop, MultipartFile multipartFile) throws IOException;
 
     void insertJewelleryShopCardData(JewelleryShopCardData jewelleryShopCardData, MultipartFile multipartFile) throws IOException;
 }
