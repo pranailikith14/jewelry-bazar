@@ -1,5 +1,6 @@
 package com.jewelry.jewelrystore_microservice.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jewelry.jewelrystore_microservice.model.JewelleryShop;
 import com.jewelry.jewelrystore_microservice.model.JewelleryShopCardData;
 import com.jewelry.jewelrystore_microservice.service.JewelleryShopService;
@@ -12,8 +13,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.http.HttpResponse;
 import java.util.List;
@@ -94,6 +97,27 @@ public class JewelleryShopController {
             log.error("Validation Error: {}", illegalArgumentException.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     Map.of("status", HttpStatus.BAD_REQUEST.value(), "message", illegalArgumentException.getMessage())
+            );
+        }
+        catch (Exception exception) {
+            log.error("Error while inserting shop: {}", exception.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    Map.of("status", HttpStatus.INTERNAL_SERVER_ERROR.value(), "message", "Internal Server Error")
+            );
+        }
+    }
+
+    @RequestMapping(value = "/insertShopCardData", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Map<String, Object>> insertJewelleryShopCardData(@RequestPart ("jewelleryShopCardData") String jewelleryShopCardData,
+                                                                           @RequestPart ("multipartFile") MultipartFile multipartFile) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JewelleryShopCardData jewelleryShopCardData1 = objectMapper.readValue(jewelleryShopCardData, JewelleryShopCardData.class);
+            jewelleryShopService.insertJewelleryShopCardData(jewelleryShopCardData1, multipartFile);
+            log.info("Successfully inserted shop : {}", jewelleryShopCardData1.getBrand());
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(
+                    Map.of("status", HttpStatus.CREATED.value(), "message", "Data inserted successfully")
             );
         }
         catch (Exception exception) {

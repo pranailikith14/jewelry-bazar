@@ -6,7 +6,9 @@ import com.jewelry.jewelrystore_microservice.model.JewelleryShopCardData;
 import com.jewelry.jewelrystore_microservice.repository.JewelleryShopCardDataRepository;
 import com.jewelry.jewelrystore_microservice.repository.JewelleryShopRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -38,8 +40,8 @@ public class JewelleryShopServiceImpl implements JewelleryShopService{
         /**
          * to check whether exactly three brands are given or not
          */
-        if (brands == null || brands.size() != 3) {
-            throw new IllegalArgumentException("Exactly 3 brand names must be provided.");
+        if (brands == null || brands.size() > 3) {
+            throw new IllegalArgumentException("3 brand names or less than that must be provided.");
         }
         /**
          * check the uniqueness in the list of brands
@@ -68,6 +70,24 @@ public class JewelleryShopServiceImpl implements JewelleryShopService{
         }
 
         jewelleryShopRepository.save(jewelleryShop);
+    }
+
+    @Override
+    public void insertJewelleryShopCardData(JewelleryShopCardData jewelleryShopCardData, MultipartFile multipartFile) throws IOException {
+       if (jewelleryShopCardData == null || jewelleryShopCardData.getBrand() == null || jewelleryShopCardData.getBrand().isBlank()) {
+           throw new IllegalArgumentException("Jewellery shop brand cannot be null or empty");
+       }
+
+       Optional<JewelleryShopCardData> existingShop = jewelleryShopCardDataRepository.findByBrand(jewelleryShopCardData.getBrand());
+       if (existingShop.isPresent()) {
+           throw new IllegalArgumentException("Jewellery shop with this brand already exists.");
+       }
+
+       if (!multipartFile.isEmpty() && multipartFile != null) {
+           jewelleryShopCardData.setLogo(multipartFile.getBytes());
+       }
+
+       jewelleryShopCardDataRepository.save(jewelleryShopCardData);
     }
 
 }

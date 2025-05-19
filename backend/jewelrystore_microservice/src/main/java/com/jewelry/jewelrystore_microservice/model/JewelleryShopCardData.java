@@ -17,5 +17,6 @@ public class JewelleryShopCardData {
     private String id;
     private String brand;
     private String stores;
+    private byte[] logo;
     private List<JewelleryShopSchemeCardData> schemes;
 }
