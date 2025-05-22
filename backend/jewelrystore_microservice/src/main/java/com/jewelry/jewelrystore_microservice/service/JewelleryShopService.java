@@ -1,7 +1,6 @@
 package com.jewelry.jewelrystore_microservice.service;
 
-import com.jewelry.jewelrystore_microservice.model.JewelleryShop;
-import com.jewelry.jewelrystore_microservice.model.JewelleryShopCardData;
+import com.jewelry.jewelrystore_microservice.model.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -11,7 +10,7 @@ public interface JewelleryShopService {
 
     List<JewelleryShopCardData> getAllShops();
 
-    List<JewelleryShop> getShopsByBrands(List<String> brands);
+    List<BrandSchemeFilterResponse> getShopsByBrandsAndScheme(List<BrandSchemeFilterRequest> brandSchemeFilterRequestList);
 
     void insertJewelleryShopData(JewelleryShop jewelleryShop, MultipartFile multipartFile) throws IOException;
 

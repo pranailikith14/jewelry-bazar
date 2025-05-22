@@ -1,8 +1,8 @@
 package com.jewelry.jewelrystore_microservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jewelry.jewelrystore_microservice.model.JewelleryShop;
-import com.jewelry.jewelrystore_microservice.model.JewelleryShopCardData;
+import com.jewelry.jewelrystore_microservice.exception.ResourceNotFoundException;
+import com.jewelry.jewelrystore_microservice.model.*;
 import com.jewelry.jewelrystore_microservice.service.JewelleryShopService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -50,28 +51,58 @@ public class JewelleryShopController {
     }
 
     @Operation(
-            summary = "Get the jewellery shop data for the selected ones",
-            description = "Filter and return jewellery shops for exactly 3 unique brand names",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    required = true,
-                    content = @Content(
-                            mediaType = "application/json",
-                            array = @ArraySchema(
-                                    schema = @Schema(type = "string", example = "Tanishq")
-                            )
-                    )
-            ),
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Matching jewellery shops"),
-                    @ApiResponse(responseCode = "400", description = "Invalid request (less/more/duplicate brands)"),
-                    @ApiResponse(responseCode = "404", description = "No shops found for given brands")
-            }
+            summary = "Filter jewellery shops by brand and schemes",
+            description = "Returns a list of jewellery shops along with matching schemes for up to 3 selected brands"
     )
-    @PostMapping("/filter-by-brands")
-    public ResponseEntity<List<JewelleryShop>> getShopsByBrands(@RequestBody List<String> brands) {
-        List<JewelleryShop> jewelleryShops = jewelleryShopService.getShopsByBrands(brands);
-        return ResponseEntity.ok(jewelleryShops);
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Filtered shop data retrieved successfully",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = BrandSchemeFilterResponse.class)))
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid input or more than 3 brands provided",
+                    content = @Content(schema = @Schema(example = "{\"status\":400, \"message\":\"3 brand names or less than that must be provided.\"}"))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "No shops found for the selected brands",
+                    content = @Content(schema = @Schema(example = "{\"status\":404, \"message\":\"No jewellery shops found for selected brands.\"}"))
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal Server Error",
+                    content = @Content(schema = @Schema(example = "{\"status\":500, \"message\":\"Internal Server Error\"}"))
+            )
+    })
+    @PostMapping("/filter-by-brands-and-schemes")
+    public ResponseEntity<com.jewelry.jewelrystore_microservice.model.ApiResponse<List<BrandSchemeFilterResponse>>> getShopsByBrandsAndSchemes(
+            @RequestBody List<BrandSchemeFilterRequest> brandSchemeFilterRequestList) {
+
+        log.info("Received filter request for {} brands", brandSchemeFilterRequestList.size());
+
+        try {
+            List<BrandSchemeFilterResponse> responseList = jewelleryShopService.getShopsByBrandsAndScheme(brandSchemeFilterRequestList);
+            log.info("Successfully filtered {} brand(s) with matching schemes", responseList.size());
+            return ResponseEntity.ok(
+                    new com.jewelry.jewelrystore_microservice.model.ApiResponse<>(HttpStatus.OK.value(), "Schemes Fetched Successfully", LocalDateTime.now().toString(), responseList)
+            );
+        } catch (IllegalArgumentException ex) {
+            log.warn("Validation error in request: {}", ex.getMessage());
+            return ResponseEntity.badRequest().body(
+                    new com.jewelry.jewelrystore_microservice.model.ApiResponse<>(HttpStatus.BAD_REQUEST.value(), ex.getMessage(),LocalDateTime.now().toString(), null));
+        } catch (ResourceNotFoundException ex) {
+            log.warn("No matching shops found: {}", ex.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new com.jewelry.jewelrystore_microservice.model.ApiResponse<>(HttpStatus.NOT_FOUND.value(), ex.getMessage(), LocalDateTime.now().toString(), null));
+        } catch (Exception ex) {
+            log.error("Unexpected error during shop filter operation", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new com.jewelry.jewelrystore_microservice.model.ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error", LocalDateTime.now().toString(),null));
+        }
     }
+
 
     @Operation(
             summary = "Insert Jewellery Shop Data",

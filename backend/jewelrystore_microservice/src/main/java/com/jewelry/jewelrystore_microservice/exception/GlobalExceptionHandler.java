@@ -1,43 +1,45 @@
 package com.jewelry.jewelrystore_microservice.exception;
 
+import com.jewelry.jewelrystore_microservice.model.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
-        Map<String, Object> errorMap = new HashMap<>();
-        errorMap.put("timestamp", LocalDateTime.now());
-        errorMap.put("status", HttpStatus.NOT_FOUND.value());
-        errorMap.put("message", resourceNotFoundException.getMessage());
-        return new ResponseEntity<>(errorMap, HttpStatus.NOT_FOUND);
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ApiResponse<Object>> handleIllegalArgument(IllegalArgumentException ex) {
+        return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), LocalDateTime.now().toString(),null);
     }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<ApiResponse<Object>> handleNotFound(ResourceNotFoundException ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), LocalDateTime.now().toString(),null);
+    }
+
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleGeneralException(Exception exception) {
-        Map<String, Object> errorMap = new HashMap<>();
-        errorMap.put("timestamp", LocalDateTime.now());
-        errorMap.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        errorMap.put("message", "Something went wrong");
-        errorMap.put("debug", exception.getMessage());
-        return new ResponseEntity<>(errorMap, HttpStatus.INTERNAL_SERVER_ERROR);
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ApiResponse<Object>> handleGeneric(Exception ex) {
+        return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", LocalDateTime.now().toString(),null);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<?> handleIllegalArgument(IllegalArgumentException illegalArgumentException) {
-        Map<String, Object> errorMap = new HashMap<>();
-        errorMap.put("timestamp", LocalDateTime.now());
-        errorMap.put("status", HttpStatus.BAD_REQUEST.value());
-        errorMap.put("message", illegalArgumentException.getMessage());
-        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
+    private ResponseEntity<ApiResponse<Object>> buildResponse(HttpStatus status, String message, String timeStamp, Object data) {
+        ApiResponse<Object> response = new ApiResponse<Object>(status.value(),message,timeStamp,data);
+        response.setStatus(status.value());
+        response.setMessage(message);
+        response.setTimeStamp(timeStamp);
+        response.setData(data);
+        return new ResponseEntity<>(response, status);
     }
 
 }
+
